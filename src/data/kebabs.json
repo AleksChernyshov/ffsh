@@ -1,0 +1,62 @@
+[
+  {
+      "id": "1",
+      "name": "Classic Kebab",
+      "format": [
+        {
+          "size": "Medium",
+          "price": 20
+        },
+        {
+          "size": "Large",
+          "price": 30
+        }
+      ],
+      "description": "A classic kebab with fresh salad, tender meat, and our special sauce",
+      "category": "kebab",
+      "img": "/assets/Classic-Kebab.jpeg",
+      "chips": [],
+      "extras": [
+        {
+          "name": "Cheese",
+          "price": 2,
+          "added": false
+        },
+        {
+          "name": "Chiken",
+          "price": 4,
+          "added": false
+        }
+      ]
+  },
+  {
+    "id": "2",
+    "name": "Spicy Kebab",
+    "format": [
+      {
+        "size": "Medium",
+        "price": 22
+      },
+      {
+        "size": "Large",
+        "price": 32
+      }
+    ],
+    "description": "For those who like it hot: a spicy kebab with fresh salad, spicy meat, and our hot sauce",
+    "category": "kebab",
+    "img": "/assets/Spicy-Kebab.jpeg",
+    "chips": ["Spicy"],
+    "extras": [
+      {
+        "name": "Cheese",
+        "price": 2,
+        "added": false
+      },
+      {
+        "name": "Chiken",
+        "price": 4,
+        "added": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,94 @@
+[
+  {
+    "id": "1",
+    "name": "Margherita",
+    "format": [
+      {
+        "size": "Small",
+        "price": 15
+      },
+      {
+        "size": "Medium",
+        "price": 20
+      },
+      {
+        "size": "Large",
+        "price": 25
+      }
+    ],
+    "description": "Classic pizza with tomato sauce, mozzarella, and basil",
+    "category": "pizza",
+    "img": "/assets/Margherita.jpeg",
+    "chips": ["Vegan"],
+    "extras": [
+      {
+        "name": "Cheese",
+        "price": 2,
+        "added": false
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Pepperoni",
+    "format": [
+      {
+        "size": "Small",
+        "price": 17
+      },
+      {
+        "size": "Medium",
+        "price": 22
+      },
+      {
+        "size": "Large",
+        "price": 27
+      }
+    ],
+    "description": "Pizza with spicy pepperoni, tomato sauce, and mozzarella",
+    "category": "pizza",
+    "img": "/assets/Pepperoni.jpeg",
+    "chips": ["Spicy"],
+    "extras": [
+      {
+        "name": "Cheese",
+        "price": 2,
+        "added": false
+      }, 
+      {
+        "name": "Pepperoni",
+        "price": 3,
+        "added": false
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Hawaiian",
+    "format": [
+      {
+        "size": "Small",
+        "price": 18
+      },
+      {
+        "size": "Medium",
+        "price": 23
+      },
+      {
+        "size": "Large",
+        "price": 28
+      }
+    ],
+    "description": "Exotic pizza with pineapple chunks, ham, tomato sauce, and mozzarella",
+    "category": "pizza",
+    "img": "/assets/Hawaiian.jpeg",
+    "chips": [],
+    "extras": [
+      {
+        "name": "Cheese",
+        "price": 2,
+        "added": false
+      }
+    ]
+  }
+]
