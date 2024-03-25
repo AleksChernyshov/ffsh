@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ffsh/static/css/main.edfda3e6.css",
+    "main.js": "/ffsh/static/js/main.956ae344.js",
+    "index.html": "/ffsh/index.html",
+    "main.edfda3e6.css.map": "/ffsh/static/css/main.edfda3e6.css.map",
+    "main.956ae344.js.map": "/ffsh/static/js/main.956ae344.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.edfda3e6.css",
+    "static/js/main.956ae344.js"
+  ]
+}
