@@ -1,6 +1,5 @@
 {
   "name": "ffsh",
-  "homepage": "https://AleksChernyshov.github.io/ffsh",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
