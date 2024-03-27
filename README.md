@@ -14,6 +14,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### Also deployed on:
 
-[https://alekschernyshov.github.io/ffsh/](https://alekschernyshov.github.io/ffsh/)
+[https://f6st.vercel.app/](https://f6st.vercel.app/)
 
 but repository must be public
