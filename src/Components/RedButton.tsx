@@ -1,15 +1,22 @@
+import { IconButton, useTheme } from "@mui/material"
+
 type RedButtonProps = {
   text: string,
   action: (e: any) => void, 
+  disabled?: boolean,
   style?: {}
 }
 
-export default function RedButton({text, action, style}: RedButtonProps) {
+export default function RedButton({ text, action, disabled, style }: RedButtonProps) {
+  const theme = useTheme()
   return (
-    <button
-      style={{
+    <IconButton
+      sx={{
+        '&:hover': {
+          backgroundColor: '#ffffffcc',
+        },
+        backgroundColor: theme.palette.customColor.main,
         color: 'black',
-        backgroundColor: '#fa3a1e',
         fontSize: 18,
         fontWeight: 600,
         border: 0,
@@ -21,9 +28,10 @@ export default function RedButton({text, action, style}: RedButtonProps) {
         cursor: 'pointer',
         ...style
       }}
+      disabled={disabled}
       onClick={(e) => action(e)}
     >
-      {text}
-    </button>
+      { text }
+    </IconButton>
   )
 }

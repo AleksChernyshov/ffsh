@@ -1,22 +1,32 @@
-
+import { useState } from 'react';
 import Nav from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/MenuOutlined';
-import { Button } from '@mui/material';
+import { Button, Drawer, useTheme} from '@mui/material';
 import { useNavigate } from 'react-router';
-// import LanguageSwitcher from './LanguageSwitcher';
+import LanguageSwitcher from './LanguageSwitcher';
+import DrawerList from './DrawerList';
+import { useTranslation } from 'react-i18next';
 
 type AppBarProps = {
   backButton?: boolean, 
   pageTitle: string,
-  toggleDrawer?: any
 }
 
-export default function AppBar({ backButton, pageTitle, toggleDrawer }: AppBarProps) {
-  
+export default function AppBar({ backButton, pageTitle }: AppBarProps) {
+
   const navigate = useNavigate()
+  const { t } = useTranslation()
+  const theme = useTheme();
+
+  const [open, setOpen] = useState(false);
+
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
+
   return (
       <Nav position="static">
         <Toolbar sx={{bgcolor: 'white', paddingLeft: backButton ? 0 : 2}}>
@@ -25,7 +35,7 @@ export default function AppBar({ backButton, pageTitle, toggleDrawer }: AppBarPr
             <Button
               sx={{
                 color: 'black',
-                backgroundColor: '#fa3a1e',
+                backgroundColor: theme.palette.customColor.main,
                 fontWeight: 700,
                 border: 0,
                 padding: 0,
@@ -37,23 +47,40 @@ export default function AppBar({ backButton, pageTitle, toggleDrawer }: AppBarPr
               }}
               onClick={() => navigate(-1)}
             >
-              BACK
+              { t('buttons.back') }
             </Button> :
             <IconButton
               size="large"
-              edge="start"
-              // color="inherit"
               aria-label="menu"
-              sx={{ mr: 2, color: 'black', '&:hover': { backgroundColor: '#fa3a1ecc', } }}
+              sx={{
+                color: 'black',
+                backgroundColor: theme.palette.customColor.main,
+                '&:hover': {
+                  backgroundColor: 'white'
+                },
+                marginLeft: '-16px',
+                border: 0,
+                padding: 0,
+                borderRadius: 0,
+                width: '56px',
+                height: '56px',
+              }} // '&:hover': { backgroundColor: '#fa3a1ecc' },
               onClick={toggleDrawer(true)}
             >
               <MenuIcon />
             </IconButton>
-        }
-          <Typography color='black' textAlign='center' mr='60px' variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          }
+          
+          <Typography color='black' textAlign='center' variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {pageTitle}
-        </Typography>
-        {/* <LanguageSwitcher /> */}
+          </Typography>
+          
+          <LanguageSwitcher />
+          
+          <Drawer open={open} onClose={toggleDrawer(false)}>
+            <DrawerList toggleDrawer={toggleDrawer} />
+          </Drawer>
+          
         </Toolbar>
       </Nav>
   );

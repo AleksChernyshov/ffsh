@@ -3,11 +3,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Box, Chip, FormControl, FormControlLabel, FormGroup, FormLabel, Stack, Switch, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { Box, Chip, FormControl, FormControlLabel, FormGroup, FormLabel, Stack, Switch, ToggleButton, ToggleButtonGroup, useTheme } from '@mui/material';
 import RedButton from './RedButton';
 import { Extra, Format, Product } from '../types/ProductTypes';
 import { Basket } from '../types/Basket';
 import { v4 as uuid } from 'uuid';
+import { useTranslation } from 'react-i18next';
 
 type ProductDetailsCardProps = {
   selectedProduct: Product, 
@@ -16,6 +17,9 @@ type ProductDetailsCardProps = {
 }
 
 export default function ProductDetailsCard({ selectedProduct, setTotalCost, setProductForOrder }: ProductDetailsCardProps) {
+
+  const { t } = useTranslation()
+  const theme = useTheme()
   
   const [format, setFormat] = useState<Format>(selectedProduct.format[selectedProduct.format.length - 1]);
   const [extras, setExtras] = useState<Extra[]>(selectedProduct.extras);
@@ -102,6 +106,19 @@ export default function ProductDetailsCard({ selectedProduct, setTotalCost, setP
             exclusive
             onChange={handleChangeFormat}
             aria-label="Platform"
+            sx={{
+              '& .MuiToggleButtonGroup-grouped': {
+                borderColor: theme.palette.customColor.mainOp, // Цвет обводки для ToggleButton
+                '&.Mui-selected, &.Mui-selected:hover': {
+                  color: 'black', // Цвет текста для выбранного и наведенного ToggleButton
+                  backgroundColor: theme.palette.customColor.main, // Цвет фона для выбранного ToggleButton
+                  borderColor: theme.palette.customColor.mainOp, // Сохраняем цвет обводки для выбранного ToggleButton
+                },
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 0, 0, 0.1)', // Легкая подсветка при наведении
+                },
+              },
+            }}
           >
             {
               selectedProduct.format.map((format: Format, i: number) => (
@@ -110,15 +127,24 @@ export default function ProductDetailsCard({ selectedProduct, setTotalCost, setP
             }
           </ToggleButtonGroup>
           
-          <FormControl sx={{alignSelf: 'flex-start'}} component="fieldset" variant="standard" color='warning'>
-            <FormLabel component="legend">Extras:</FormLabel>
+          <FormControl sx={{alignSelf: 'flex-start', ':focus': {color: theme.palette.customColor.main}}} component="fieldset" variant="standard" >
+            <FormLabel  component="legend">{ `${t("detailsPage.extra")}:` }</FormLabel>
             <FormGroup>
               {
                 selectedProduct.extras.map((extra) => {
                   return <FormControlLabel
                     key={extra.name}
                     control={
-                      <Switch checked={extra.added} onChange={handleChangeExtras} name={extra.name} color='warning'/>
+                      <Switch checked={extra.added} onChange={handleChangeExtras} name={extra.name}
+                        sx={{
+                          '& .MuiSwitch-switchBase.Mui-checked': {
+                            color: theme.palette.customColor.main,
+                            '& + .MuiSwitch-track': {
+                              backgroundColor: theme.palette.customColor.mainOp
+                            },
+                          },
+                        }}
+                      />
                     }
                     label={`${extra.name} (+${extra.price}$)`}
                   />
@@ -129,7 +155,7 @@ export default function ProductDetailsCard({ selectedProduct, setTotalCost, setP
 
         <Box display='flex' justifyContent='space-between' alignItems='center' width='100%'>
           <Typography gutterBottom variant='body1'>
-            Number of items
+            { t("detailsPage.numberOfItems") }
           </Typography>
           <Box display='flex' alignItems='center'>
             <RedButton text='-' action={decrement} />

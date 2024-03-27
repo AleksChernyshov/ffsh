@@ -1,4 +1,4 @@
-import { BottomNavigation, BottomNavigationAction, Box, Container, Grid, styled } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Box, Container, Grid, styled, useTheme } from "@mui/material";
 import { v4 as uuid } from 'uuid';
 import AppBar from "../Components/AppBar";
 import RedButton from "../Components/RedButton";
@@ -9,42 +9,57 @@ import { Extra } from "../types/ProductTypes";
 import AppleIcon from '@mui/icons-material/Apple';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 const StyledBottomNavigationAction = styled(BottomNavigationAction)(({ theme }) => ({
   '&.Mui-selected': {
-    color: '#fa3a1e', 
+    color: theme.palette.customColor.main, 
     '& .MuiSvgIcon-root': {
-      color: '#fa3a1e', 
+      color: theme.palette.customColor.main, 
     },
   },
 }));
 
 const CartPage = () => {
 
+  const navigate = useNavigate()
+
+  const { t } = useTranslation()
+
+  const theme = useTheme()
+
   const storageBasket = JSON.parse(localStorage.getItem('basket') ?? '[]')
   const orders = JSON.parse(localStorage.getItem('orders') ?? '[]')
 
   const [basketProducts, setBasket] = useState(storageBasket)
   const [paymentMethod, setPaymentMethod] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0)
 
   useEffect(() => {
     localStorage.setItem('basket', JSON.stringify(basketProducts))
-  }, [basketProducts])
+    setTotalPrice(basketProducts.reduce((acc: number, product: Basket) => acc + ((product.format.price + product.extras.reduce((acc: number, extra: Extra) => extra.added ? acc + extra.price : acc, 0)) * product.quantity), 0))
+  }, [basketProducts, navigate])
 
-  const handleCreateOrder = () => {
+  const handleCreateOrder = async () => {
     const orderId = uuid()
-    localStorage.setItem('orders', JSON.stringify([...orders, {
+    localStorage.setItem('orders', JSON.stringify([ {
       orderId,
       paymentMethod,
       orderedProducts: basketProducts
-    }]))
+    }, ...orders]))
     setBasket([])
     toast.error(`Your order was created, it #${orderId}`)
   }
 
+  const handlePay = async() => {
+    await handleCreateOrder()
+    navigate('/orders')
+  }
+
   return <>
-    <AppBar backButton pageTitle='Basket' />
+    <AppBar backButton pageTitle={t('appBar.basket')} />
     <Container >
 
       <Grid
@@ -67,30 +82,18 @@ const CartPage = () => {
               setPaymentMethod(newValue);
             }}
           >
-            <StyledBottomNavigationAction label="Apple Pay" icon={<AppleIcon />} />
-            <StyledBottomNavigationAction label="Credit Card" icon={<CreditCardIcon />} />
-            <StyledBottomNavigationAction label="Pay manually" icon={<AttachMoneyIcon />} />
+            <StyledBottomNavigationAction label={`${t('basketPage.applePay')}`} icon={<AppleIcon />} />
+            <StyledBottomNavigationAction label={`${t('basketPage.creditcard')}`} icon={<CreditCardIcon />} />
+            <StyledBottomNavigationAction label={`${t('basketPage.payManualy')}`} icon={<AttachMoneyIcon />} />
           </BottomNavigation>
         </Box> : null
       }
-
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        // theme="dark"
-      />
       
       <RedButton
-        text={`Pay (${basketProducts.reduce((acc: number, product: Basket) => acc + ((product.format.price + product.extras.reduce((acc: number, extra: Extra) => extra.added ? acc + extra.price : acc, 0)) * product.quantity), 0)}$)`}
-        action={() => handleCreateOrder()}
-        style={{ width: '80%', position: 'fixed', bottom: '20px', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#fa3a1ecc',}}
+        text={`${t('buttons.pay')} (${totalPrice}$)`}
+        action={() => handlePay()}
+        disabled={!totalPrice}
+        style={{ width: '80%', height: '56px', position: 'fixed', bottom: '20px', left: '50%', transform: 'translateX(-50%)', backgroundColor: theme.palette.customColor.mainOp }}
       />
       
     </Container>

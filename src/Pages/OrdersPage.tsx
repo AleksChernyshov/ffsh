@@ -1,18 +1,21 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography, useTheme } from "@mui/material";
 import AppBar from "../Components/AppBar";
 import { Basket } from "../types/Basket";
 import { useNavigate } from "react-router";
 import RedButton from "../Components/RedButton";
 import { Order } from "../types/Order";
 import OrderCard from "../Components/OrderCard";
+import { useTranslation } from "react-i18next";
 
 const OrdersPage = () => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
+  const theme = useTheme()
 
   const orders = JSON.parse(localStorage.getItem('orders') ?? '[]')
 
   return <>
-    <AppBar backButton pageTitle='Orders' />
+    <AppBar pageTitle={t('appBar.orders')} />
     <Container style={{marginBottom: '120px'}}>
 
       {
@@ -20,7 +23,7 @@ const OrdersPage = () => {
           return <>
             <Box mt={2} display='flex' flexDirection='column' gap={2}>
               <Typography variant="h5" component="div">
-                { `Order: ${order.orderId}` }
+                { `${t('orderPage.order')}: ${order.orderId}` }
               </Typography>
               <Grid
                 container
@@ -38,9 +41,9 @@ const OrdersPage = () => {
       }
 
       <RedButton
-        text={'New Order'}
+        text={t('buttons.newOrder')}
         action={() => navigate('/')}
-        style={{ width: '80%', position: 'fixed', bottom: '20px', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#fa3a1ecc',}}
+        style={{ width: '80%', height: '56px', position: 'fixed', bottom: '20px', left: '50%', transform: 'translateX(-50%)', backgroundColor: theme.palette.customColor.mainOp }}
       />
       
     </Container>

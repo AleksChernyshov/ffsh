@@ -1,0 +1,42 @@
+{
+  "appBar": {
+    "products": "Products",
+    "orders": "Orders",
+    "basket": "Basket"
+  }, 
+  "orderPage": {
+    "order": "Order"
+  },
+  "productsPage": {
+    "pizza": "Pizza",
+    "kebab": "Kebab"
+  },
+  "detailsPage": {
+    "extra": "Extra",
+    "numberOfItems": "Number of items"
+  },
+  "basketPage": {
+    "creditcard": "Credit Card",
+    "payManualy": "Pay Manualy",
+    "applePay": "Apple Pay"
+  },
+  "landingPage": {
+    "login": "Login",
+    "fastQR": "Fast QR code ordering",
+    "unlock": "Unlock a 6% Comeback Reward for your loyal customers.",
+    "registerToday": "Register today and pay 0% fee to us for 3 months.",
+    "register": "Register",
+    "frequently": "Frequently asked questions",
+    "howMuch": "How much F6ST costs?",
+    "why": "Why would I use F6ST?",
+    "estaurantsOnly": "Is F6ST for restaurants only?",
+    "contact": "How should I contact you?"
+  },
+  "buttons": {
+    "back": "BACK",
+    "basket": "Basket",
+    "pay": "Pay",
+    "newOrder": "New Order",
+    "addToBasket": "Add To Basket"
+  }
+}

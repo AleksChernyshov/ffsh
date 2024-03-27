@@ -33,8 +33,6 @@ const ProductCard = ({ product, setBasket }: ProductCardProps) => {
           return item
         })
       }
-
-      // console.log(prevBasket.some((item) => item.item.id === product.id));
       
       return [...prevBasket, {
         position: uuid(),

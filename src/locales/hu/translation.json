@@ -1,0 +1,43 @@
+{
+  "appBar": {
+    "products": "Termékek",
+    "orders": "Rendelések",
+    "basket": "Kosár"
+  }, 
+  "orderPage": {
+    "order": "Rendelés",
+    "newOrder": "Új rend"
+  },
+  "productsPage": {
+    "pizza": "Pizza",
+    "kebab": "Kebab"
+  },
+  "detailsPage": {
+    "extra": "Külön",
+    "numberOfItems": "Darabszám"
+  },
+  "basketPage": {
+    "creditcard": "Hitelkártya",
+    "payManualy": "Fizessen manuálisan",
+    "applePay": "Apple Pay"
+  },
+  "landingPage": {
+    "login": "Belépés",
+    "fastQR": "Gyors QR kód rendelés",
+    "unlock": "Nyerjen 6%-os visszatérési jutalmat hűséges ügyfelei számára.",
+    "registerToday": "Regisztráljon még ma, és fizessen nekünk 0% díjat 3 hónapig.",
+    "register": "Regisztráció",
+    "frequently": "Gyakran Ismételt Kérdések",
+    "howMuch": "Mennyibe kerül az F6ST?",
+    "why": "Miért használjam az F6ST?",
+    "estaurantsOnly": "Az F6ST csak éttermekben használható?",
+    "contact": "Hogyan vegyem fel veled a kapcsolatot?"
+  },
+  "buttons": {
+    "back": "VISSZA",
+    "basket": "Kosár",
+    "pay": "Fizetés",
+    "newOrder": "Új rend",
+    "addToBasket": "Kosárba helyez"
+  }
+}

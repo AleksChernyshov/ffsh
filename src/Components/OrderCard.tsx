@@ -34,7 +34,7 @@ const OrderCard = ({ product }: OrderCardProps) => {
             component="img"
             sx={{ width: 140, height: 140, borderRadius: '5px' }}
             image={product.item.img}
-            alt="Live from space album cover"
+            alt={product.item.name}
           />
         </Card>
       {/* </Link> */}

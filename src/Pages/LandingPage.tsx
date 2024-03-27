@@ -1,6 +1,8 @@
-import { Box, CardMedia, Container, Stack, Typography } from "@mui/material";
+import { Box, CardMedia, Container, Stack, Typography, useTheme } from "@mui/material";
 import RedButton from "../Components/RedButton";
 import { useNavigate } from "react-router";
+import LanguageSwitcher from "../Components/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 const links = [
   { title: 'Service Terms', url: '/'},
@@ -11,6 +13,8 @@ const links = [
 const LandingPage = () => {
 
   const navigate = useNavigate()
+  const { t } = useTranslation()
+  const theme = useTheme()
 
   return <>
     <Box sx={{
@@ -20,12 +24,17 @@ const LandingPage = () => {
         justifyContent: 'space-between',
         padding: '4px'
       }}
-      onClick={() => navigate('/')}
     >
-      <Typography sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', bgcolor: 'black', fontWeight: 'bold', color: 'white', padding: '0 8px'}}>
+      <Typography onClick={() => navigate('/')} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', bgcolor: 'black', fontWeight: 'bold', color: 'white', padding: '0 8px', cursor: 'pointer'}}>
         <Typography component='span' >F6ST</Typography>
-        <Typography component='span' color='#fa3a1e' >.com</Typography>
+        <Typography component='span' color={ theme.palette.customColor.main } >.com</Typography>
       </Typography>
+      <Box display='flex' alignItems='center' gap={2} mr={2}>
+        <LanguageSwitcher />
+        <Typography sx={{cursor: 'pointer'}} onClick={() => navigate('/')}>
+          { t("landingPage.login") }
+        </Typography>
+      </Box>
     </Box>
     <Container>
 
@@ -33,18 +42,18 @@ const LandingPage = () => {
         
         <Box sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
           <Typography  component="div" variant="h4">
-            Fast QR code ordering
+            { t("landingPage.fastQR") }
           </Typography>
           <Typography variant="body1"  maxHeight='70px'>
-            Unlock a 6% Comeback Reward for your loyal customers.
+            { t("landingPage.unlock") }
           </Typography>
           <Typography variant="body1"  maxHeight='70px'>
-            Register today and pay 0% fee to us for 3 months.
+            { t("landingPage.registerToday") }
           </Typography>
           <RedButton
-            text='Register'
+            text={ t("landingPage.register") }
             action={() => { }}
-            style={{ width: '100%', maxWidth: '250px', backgroundColor: '#fa3a1e', alignSelf: 'center'}}
+            style={{ width: '100%', maxWidth: '250px', backgroundColor: theme.palette.customColor.main, alignSelf: 'center'}}
           />
         </Box>
 
@@ -59,11 +68,11 @@ const LandingPage = () => {
 
       <Box mt={4} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
         <Typography  component="div" variant="h5">
-          Frequently asked questions
+          { t("landingPage.frequently") }
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
           <Typography  component="div" variant="h6">
-            How much F6ST costs?
+            { t("landingPage.howMuch") }
           </Typography>
           <Typography variant="body1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...... payment goes directly to you
@@ -71,21 +80,21 @@ const LandingPage = () => {
         </Box>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
           <Typography  component="div" variant="h6">
-            Why would I use F6ST?
+            { t("landingPage.why") }
           </Typography>
           <Typography variant="body1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...          </Typography>
         </Box>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
           <Typography  component="div" variant="h6">
-            Is F6ST for restaurants only?
+            { t("landingPage.estaurantsOnly") }
           </Typography>
           <Typography variant="body1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...          </Typography>
         </Box>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
           <Typography  component="div" variant="h6">
-            How should I contact you?
+            { t("landingPage.contact") }
           </Typography>
           <Typography variant="body1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et Fill or Contact Form here
@@ -107,7 +116,7 @@ const LandingPage = () => {
       <Stack direction="row" spacing={2}>
         {
           links.map((link, index) => (
-            <Typography key={index} onClick={() => navigate(link.url)}>
+            <Typography key={index} sx={{cursor: 'pointer'}} onClick={() => navigate(link.url)}>
               {link.title}
             </Typography>
           ))

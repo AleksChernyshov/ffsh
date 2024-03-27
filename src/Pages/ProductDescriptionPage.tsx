@@ -1,6 +1,6 @@
-import { useLocation, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import ProductDetailsCard from "../Components/ProductDetailsCard";
-import { Container } from "@mui/material";
+import { Container, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import AppBar from "../Components/AppBar";
 import pizzas from "../data/pizza.json"
@@ -9,11 +9,15 @@ import Loader from "../Components/Loader";
 import RedButton from "../Components/RedButton";
 import { Product } from "../types/ProductTypes";
 import { Basket } from "../types/Basket";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const ProductDescriptionPage = () => {
 
-  const {id} = useParams()
+  const theme = useTheme()
+  const { id } = useParams()
+  const { t } = useTranslation()
+  const navigate = useNavigate()
   const { state: { category } } = useLocation()
   
   const [selectedProduct, setSelectedProduct] = useState<Product>()
@@ -22,10 +26,15 @@ const ProductDescriptionPage = () => {
 
   const storageBasket = JSON.parse(localStorage.getItem('basket') ?? '[]')
 
-  const handleFormTheOrder = () => {
+  const handleFormTheOrder = async () => {
     localStorage.setItem('basket', JSON.stringify([...storageBasket, productForOrder]))
     toast.error(`${selectedProduct?.name} added to the basket`)
   }
+
+  const handleAddToBasket = async () => {
+    await handleFormTheOrder()
+    navigate('/')
+  } 
 
   useEffect(() => {
     let product;
@@ -52,22 +61,11 @@ const ProductDescriptionPage = () => {
     <AppBar backButton pageTitle={selectedProduct.name} />
     <Container>
       <ProductDetailsCard selectedProduct={selectedProduct} setTotalCost={setTotalCost} setProductForOrder={setProductForOrder} />
-      <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          // theme="dark"
-        />
+
       <RedButton
-        text={`Add to Basket (${totalCost}$)`}
-        action={() => handleFormTheOrder()}
-        style={{ width: '100%', maxWidth: '345px', position: 'fixed', bottom: '60px', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#fa3a1ecc',}}
+        text={`${t("buttons.addToBasket")} (${totalCost}$)`}
+        action={() => handleAddToBasket()}
+        style={{ width: '100%', maxWidth: '345px', height: '56px' , position: 'fixed', bottom: '60px', left: '50%', transform: 'translateX(-50%)', backgroundColor: theme.palette.customColor.mainOp }}
       />
     </Container>
   </>;
