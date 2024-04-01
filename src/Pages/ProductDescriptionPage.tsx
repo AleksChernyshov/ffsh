@@ -65,7 +65,7 @@ const ProductDescriptionPage = () => {
       <RedButton
         text={`${t("buttons.addToBasket")} (${totalCost}$)`}
         action={() => handleAddToBasket()}
-        style={{ width: '100%', maxWidth: '345px', height: '56px' , position: 'fixed', bottom: '60px', left: '50%', transform: 'translateX(-50%)', backgroundColor: theme.palette.customColor.mainOp }}
+        style={{ width: '80%', height: '56px' , position: 'fixed', bottom: '60px', left: '50%', transform: 'translateX(-50%)', backgroundColor: theme.palette.customColor.main }}
       />
     </Container>
   </>;

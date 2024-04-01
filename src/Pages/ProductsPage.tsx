@@ -60,7 +60,7 @@ const ProductsPage = () => {
         <RedButton
           text={`${ t('buttons.basket') } (${basket.length})`}
           action={() => navigate('/cart')}
-          style={{ width: '80%', height: '56px', position: 'fixed', bottom: '20px', left: '50%', transform: 'translateX(-50%)', backgroundColor: theme.palette.customColor.mainOp}}
+          style={{ width: '80%', height: '56px', position: 'fixed', bottom: '20px', left: '50%', transform: 'translateX(-50%)', backgroundColor: theme.palette.customColor.main}}
         />
 
       </Container>

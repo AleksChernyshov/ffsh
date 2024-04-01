@@ -93,7 +93,7 @@ const CartPage = () => {
         text={`${t('buttons.pay')} (${totalPrice}$)`}
         action={() => handlePay()}
         disabled={!totalPrice}
-        style={{ width: '80%', height: '56px', position: 'fixed', bottom: '20px', left: '50%', transform: 'translateX(-50%)', backgroundColor: theme.palette.customColor.mainOp }}
+        style={{ width: '80%', height: '56px', position: 'fixed', bottom: '20px', left: '50%', transform: 'translateX(-50%)', backgroundColor: theme.palette.customColor.main }}
       />
       
     </Container>
